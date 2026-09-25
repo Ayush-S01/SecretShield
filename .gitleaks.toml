@@ -1,0 +1,20 @@
+# Gitleaks configuration for SecretShield workspace scans
+# This file controls which paths Gitleaks ignores during workspace scans.
+# See: https://github.com/gitleaks/gitleaks#configuration
+
+[extend]
+# Extend the default ruleset (uses built-in rules)
+useDefault = true
+
+[[allowlists]]
+description = "Ignore dependency and build directories"
+paths = [
+    '''node_modules''',
+    '''\.git''',
+    '''dist''',
+    '''build''',
+    '''out''',
+    '''\.vsix$''',
+    '''package-lock\.json''',
+    '''yarn\.lock''',
+]

@@ -1,0 +1,115 @@
+{
+  "name": "secretshield",
+  "displayName": "SecretShield",
+  "description": "IDE-native secret leakage prevention engine powered by Gitleaks. Detects secrets before they reach Git.",
+  "version": "0.1.0",
+  "publisher": "secretshield",
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "security",
+    "secrets",
+    "gitleaks",
+    "credentials",
+    "api-keys"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/vscode/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "secretshield.scanCurrentFile",
+        "title": "SecretShield: Scan Current File"
+      },
+      {
+        "command": "secretshield.scanWorkspace",
+        "title": "SecretShield: Scan Workspace"
+      },
+      {
+        "command": "secretshield.clearFindings",
+        "title": "SecretShield: Clear Findings"
+      },
+      {
+        "command": "secretshield.checkGitleaks",
+        "title": "SecretShield: Check Gitleaks"
+      },
+      {
+        "command": "secretshield.openSettings",
+        "title": "SecretShield: Open Settings"
+      }
+    ],
+    "configuration": {
+      "title": "SecretShield",
+      "properties": {
+        "secretshield.gitleaksPath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to the Gitleaks executable. Leave empty to use Gitleaks from PATH."
+        },
+        "secretshield.enableRealtimeScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time scanning as you type (debounced)."
+        },
+        "secretshield.scanOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan the current file when it is saved."
+        },
+        "secretshield.debounceMs": {
+          "type": "number",
+          "default": 750,
+          "minimum": 100,
+          "maximum": 5000,
+          "description": "Debounce delay in milliseconds before triggering a real-time scan."
+        },
+        "secretshield.excludePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            "out",
+            "*.lock",
+            "package-lock.json",
+            "yarn.lock"
+          ],
+          "description": "Glob patterns to exclude from workspace scans."
+        },
+        "secretshield.scanTimeoutMs": {
+          "type": "number",
+          "default": 30000,
+          "minimum": 1000,
+          "maximum": 120000,
+          "description": "Maximum time in milliseconds to wait for a Gitleaks scan to complete."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npx @vscode/vsce package",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@vscode/vsce": "^4.0.0"
+  }
+}

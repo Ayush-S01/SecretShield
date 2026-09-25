@@ -1,0 +1,6 @@
+{
+  "secretshield.gitleaksPath": "C:\\Users\\ayush\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gitleaks.Gitleaks_Microsoft.Winget.Source_8wekyb3d8bbwe\\gitleaks.exe",
+  "secretshield.enableRealtimeScan": true,
+  "secretshield.scanOnSave": true,
+  "secretshield.debounceMs": 750
+}
